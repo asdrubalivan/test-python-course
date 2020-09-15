@@ -40,19 +40,19 @@ class AppTest(TestCase):
 
     def test_print_posts(self):
         blog = Blog("Test", "Test Author")
-        blog.create_post('Test Post', 'Test Content')
+        blog.create_post("Test Post", "Test Content")
         app.blogs = {"Test": blog}
-        with patch('app.print_post') as mocked_print_post:
+        with patch("app.print_post") as mocked_print_post:
             app.print_posts(blog)
             mocked_print_post.assert_called_with(blog.posts[0])
 
     def test_print_post(self):
         post = Post("Post title", "Post content")
-        expected_print = '''
+        expected_print = """
 --- Post title ---
 
 Post content
-'''
-        with patch('builtins.print') as mocked_print:
+"""
+        with patch("builtins.print") as mocked_print:
             app.print_post(post)
             mocked_print.assert_called_with(expected_print)
